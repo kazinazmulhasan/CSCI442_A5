@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.google.atap.tangoservice.Tango;
 import com.google.atap.tangoservice.TangoAreaDescriptionMetaData;
+import com.google.atap.tangoservice.TangoConfig;
 import com.google.atap.tangoservice.TangoErrorException;
 
 import java.io.File;
@@ -71,6 +72,9 @@ public class AdfUuidListViewActivity extends Activity implements SetAdfNameDialo
         mTangoSpaceAdfListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                TangoConfig mConfig = setTangoConfig(mTango, false, true);
+//                mConfig.putString(TangoConfig.KEY_STRING_AREADESCRIPTION, "08324109-008b-4e2f-933c-08eeae7410ec");
+//                mTango.connect(mConfig);
                 Intent intent = new Intent(AdfUuidListViewActivity.this, HelloMotionTrackingActivity.class);
                 startActivity(intent);
             }
@@ -83,6 +87,30 @@ public class AdfUuidListViewActivity extends Activity implements SetAdfNameDialo
         mAppSpaceAdfListAdapter = new AdfUuidArrayAdapter(this, mAppSpaceAdfDataList);
         mAppSpaceAdfListView.setAdapter(mAppSpaceAdfListAdapter);
         registerForContextMenu(mAppSpaceAdfListView);
+    }
+
+    private TangoConfig setTangoConfig(Tango tango, boolean isLearningMode, boolean isLoadAdf) {
+        // Use default configuration for Tango Service.
+        // Create a new Tango configuration and enable the Camera API.
+        TangoConfig config = tango.getConfig(TangoConfig.CONFIG_TYPE_DEFAULT);
+        // Check if learning mode.
+        if (isLearningMode) {
+            // Set learning mode to config.
+            config.putBoolean(TangoConfig.KEY_BOOLEAN_LEARNINGMODE, true);
+            config.putBoolean(TangoConfig.KEY_BOOLEAN_COLORCAMERA, true);
+        }
+        // Check for Load ADF/Constant Space relocalization mode.
+        if (isLoadAdf) {
+            ArrayList<String> fullUuidList;
+            // Returns a list of ADFs with their UUIDs.
+            fullUuidList = tango.listAreaDescriptions();
+            // Load the latest ADF if ADFs are found.
+            if (fullUuidList.size() > 0) {
+                config.putString(TangoConfig.KEY_STRING_AREADESCRIPTION,
+                        fullUuidList.get(fullUuidList.size() - 1));
+            }
+        }
+        return config;
     }
 
     @Override

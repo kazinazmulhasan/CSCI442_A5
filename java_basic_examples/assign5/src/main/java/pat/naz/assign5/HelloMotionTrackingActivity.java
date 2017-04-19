@@ -67,8 +67,8 @@ public class HelloMotionTrackingActivity extends Activity {
 
                 if(XS.length() < 1 || YS.length() < 1){return;}
 
-                tarX = ((int)((new Float(XS))*1000))/100;
-                tarY = ((int)((new Float(YS))*1000))/100;
+                tarX = ((int)((new Float(XS))*1000))/1000;
+                tarY = ((int)((new Float(YS))*1000))/1000;
                 target = true;
             }
         });
@@ -198,16 +198,22 @@ public class HelloMotionTrackingActivity extends Activity {
                     ((TextView) findViewById(R.id.position)).setText(pos);
 
                     if(!target){return;}
+                    String dir = "";
 
+//                    dir += tarX+" "+posX+" "+tarY+" "+posY+"\n";
                     if(Math.abs(tarX-posX)<=3 && Math.abs(tarY-posY)<=3){
                         ((TextView) findViewById(R.id.direction)).setText("Target Reached!!");
                         return;
                     }
 
-                    String dir = "";
-                    dir += "Go " + (tarY > posY ? "Forward" : "Backward") + "\n";
-                    dir += "Then, Go " + (tarX < posX ? "Left" : "Right");
+                    if(Math.abs(tarY-posY)>3) {
+                        dir += "Go " + (tarY > posY ? "Forward" : "Backward") + "\n";
 
+                        if(Math.abs(tarX-posX)>3) {dir += "Then, ";}
+                    }
+                    if(Math.abs(tarX-posX)>3) {
+                        dir += "Go " + (tarX < posX ? "Left" : "Right");
+                    }
                     ((TextView) findViewById(R.id.direction)).setText(dir);
                 }
             }

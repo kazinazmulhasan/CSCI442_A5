@@ -340,34 +340,11 @@ public class HelloAreaDescriptionActivity extends Activity implements
                                 mRelocalizationTextView.setText(mIsRelocalized ?
                                         getString(R.string.localized) :
                                         getString(R.string.not_localized));
-
-//                                float translation[] = pose.getTranslationAsFloats();
-//                                float posX = ((int) (translation[0] * 1000)) / 100;
-//                                float posY = ((int) (translation[1] * 1000)) / 100;
-//                                final String pos = "Current Position\nX: " + posX + "\t\tY: " + posY;
-//                                ((TextView) findViewById(R.id.position)).setText(pos);
-//
-//                                if (!target) {
-//                                    return;
-//                                }
-//
-//                                if (Math.abs(tarX - posX) <= 3 && Math.abs(tarY - posY) <= 3) {
-//                                    ((TextView) findViewById(R.id.direction)).setText("Target Reached!!");
-//                                    return;
-//                                }
-//
-//                                String dir = "";
-//                                dir += "Go " + (tarY > posY ? "Forward" : "Backward") + "\n";
-//                                dir += "Then, Go " + (tarX < posX ? "Left" : "Right");
-//
-//                                ((TextView) findViewById(R.id.direction)).setText(dir);
                             }
                         }
                     });
                 }
             }
-
-
 
             @Override
             public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
