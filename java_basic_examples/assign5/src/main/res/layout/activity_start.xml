@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:labelFor="@string/app_name"
+    android:orientation="vertical"
+    android:paddingTop="220dp">
+
+    <ToggleButton
+        android:id="@+id/load_adf"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:onClick="loadAdfClicked"
+        android:textOff="@string/load_adf_off"
+        android:textOn="@string/load_adf_on"
+        android:textSize="15sp"
+        tools:layout_width="match_parent"
+        tools:paddingTop="20dp"
+        tools:textAlignment="center"
+        tools:visibility="gone" />
+
+    <ToggleButton
+        android:id="@+id/learning_mode"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:onClick="learningModeClicked"
+        android:textOff="@string/learning_mode_off"
+        android:textOn="@string/learning_mode_on"
+        android:textSize="15sp"
+        tools:layout_width="match_parent"
+        tools:paddingTop="20dp"
+        tools:textAlignment="center"
+        tools:visibility="gone" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="90dp"
+        android:onClick="startClicked"
+        android:text="@string/start_config"
+        android:textSize="24sp"
+        tools:layout_width="match_parent"
+        tools:textAlignment="center" />
+
+    <Button
+        android:id="@+id/AdfListView"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="100dp"
+        android:onClick="adfListViewClicked"
+        android:text="@string/manage_adfs"
+        android:textSize="24sp"
+        tools:layout_width="match_parent"
+        tools:textAlignment="center" />
+
+</LinearLayout>
